@@ -10,13 +10,7 @@ function AppHeader() {
       <Link to="/">
         <img src={logo} className="header-logo" alt="Logo oRecipes" />
       </Link>
-      <LoginForm
-        email=""
-        password=""
-        changeField={() => {}}
-        handleLogin={() => {}}
-        handleLogout={() => {}}
-      />
+      <LoginForm />
     </header>
   );
 }

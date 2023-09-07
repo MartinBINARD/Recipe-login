@@ -1,33 +1,30 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
+import { useAppSelector } from '../../hooks/redux';
+
 import Field from './Field';
 
 import './styles.scss';
 
-interface LoginFormProps {
-  email: string;
-  password: string;
-  changeField: (value: string, name: 'email' | 'password') => void;
-  handleLogin: () => void;
-  handleLogout: () => void;
-  isLogged?: boolean;
-  loggedMessage?: string;
+interface ChangeFieldProps {
+  name: string;
+  value: string;
 }
-function LoginForm({
-  email,
-  password,
-  changeField,
-  handleLogin,
-  handleLogout,
-  isLogged,
-  loggedMessage,
-}: LoginFormProps) {
+
+function LoginForm() {
+  const isLogged = useAppSelector((state) => state.user.logged);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleLogin();
+  };
+
+  const changeField = ({ value, name }: ChangeFieldProps) => {
+    return name === 'email' ? setEmail(value) : setPassword(value);
   };
 
   const handleChangeField = (name: 'email' | 'password') => (value: string) => {
-    changeField(value, name);
+    changeField({ value, name });
   };
 
   return (
