@@ -1,5 +1,7 @@
 import { FormEvent, useState } from 'react';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+
+import { userLogin, userLogout } from '../../store/reducers/user';
 
 import Field from './Field';
 
@@ -12,11 +14,24 @@ interface ChangeFieldProps {
 
 function LoginForm() {
   const isLogged = useAppSelector((state) => state.user.logged);
+  const loggedMessage = useAppSelector(
+    (state) => `Bienvenue ${state.user.pseudo}`
+  );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    dispatch(userLogin(formData));
+
+    setEmail('');
+    setPassword('');
   };
 
   const changeField = ({ value, name }: ChangeFieldProps) => {
@@ -25,6 +40,10 @@ function LoginForm() {
 
   const handleChangeField = (name: 'email' | 'password') => (value: string) => {
     changeField({ value, name });
+  };
+
+  const handleLogout = () => {
+    dispatch(userLogout());
   };
 
   return (
@@ -48,11 +67,13 @@ function LoginForm() {
           onSubmit={handleSubmit}
         >
           <Field
+            name="email"
             placeholder="Adresse Email"
             onChange={handleChangeField('email')}
             value={email}
           />
           <Field
+            name="password"
             type="password"
             placeholder="Mot de passe"
             onChange={handleChangeField('password')}

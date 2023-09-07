@@ -15,10 +15,12 @@ export const initialState: UserState = {
 
 export const userLogin = createAsyncThunk(
   'user/login',
-  async (userForm: UserForm) => {
+  async (formData: FormData) => {
+    const objData = Object.fromEntries(formData.entries());
+
     const { data } = await axios.post<UserState>(
       'https://orecipes-api.onrender.com/api/login',
-      userForm
+      objData
     );
 
     return data;

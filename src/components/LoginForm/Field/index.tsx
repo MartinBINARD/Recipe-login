@@ -5,12 +5,13 @@ import './styles.scss';
 
 interface FieldProps {
   value: string;
+  name: string;
   type?: string;
   placeholder: string;
   onChange: (value: string) => void;
 }
 // == Composant
-function Field({ value, type, placeholder, onChange }: FieldProps) {
+function Field({ value, name, type, placeholder, onChange }: FieldProps) {
   const inputId = useId();
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -25,6 +26,7 @@ function Field({ value, type, placeholder, onChange }: FieldProps) {
         onChange={handleChange}
         // infos de base
         id={inputId}
+        name={name}
         type={type}
         className="field-input"
         placeholder={placeholder}
