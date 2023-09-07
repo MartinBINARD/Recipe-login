@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-
 import logo from '../../assets/logo.png';
+import LoginForm from '../LoginForm';
+
 import './styles.scss';
 
 function AppHeader() {
@@ -9,6 +10,13 @@ function AppHeader() {
       <Link to="/">
         <img src={logo} className="header-logo" alt="Logo oRecipes" />
       </Link>
+      <LoginForm
+        email=""
+        password=""
+        changeField={() => {}}
+        handleLogin={() => {}}
+        handleLogout={() => {}}
+      />
     </header>
   );
 }
