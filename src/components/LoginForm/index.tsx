@@ -18,7 +18,18 @@ function LoginForm({
 }: LoginFormProps) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleLogin();
+
+    // mon intention
+    console.log(`
+      je veux récupérer mes données de formulaire pour interroger mon API ;
+      si on connait l'utilisateur, on l'enregistre dans le state global
+    `);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const objData = Object.fromEntries(formData);
+    console.log(objData);
   };
 
   return (
