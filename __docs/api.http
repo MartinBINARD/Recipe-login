@@ -1,0 +1,12 @@
+
+### Get recipes
+GET https://orecipes-api.onrender.com/api/recipes
+
+### Login
+POST https://orecipes-api.onrender.com/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "bob@mail.io",
+  "password": "bobo"
+}
