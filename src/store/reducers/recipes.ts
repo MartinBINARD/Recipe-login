@@ -9,7 +9,7 @@ interface RecipesState {
 }
 
 export const initialState: RecipesState = {
-  loading: false,
+  loading: true,
   list: [],
 };
 
