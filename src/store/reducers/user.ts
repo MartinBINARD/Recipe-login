@@ -38,7 +38,7 @@ export const login = createAsyncThunk(
 
     // à la connexion, j'ajoute le token directement
     // dans mon instance Axios
-    axiosInstance.defaults.headers.common.Authorization = data.token;
+    axiosInstance.defaults.headers.common.Authorization = `Bearer ${data.token}`;
 
     // le token est uniquement utilisé ici,
     // je peux le supprimer des mes données
@@ -61,6 +61,9 @@ const userReducer = createReducer(initialState, (builder) => {
     })
     .addCase(logout, (state) => {
       state.pseudo = null;
+
+      // je supprime mon JWT de mon instance Axios
+      delete axiosInstance.defaults.headers.common.Authorization;
     });
 });
 
