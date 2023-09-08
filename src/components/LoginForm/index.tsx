@@ -1,7 +1,10 @@
 import { FormEvent } from 'react';
+import { useAppDispatch } from '../../hooks/redux';
+
 import Field from './Field';
 
 import './styles.scss';
+import { login } from '../../store/reducers/user';
 
 interface LoginFormProps {
   handleLogin: () => void;
@@ -16,6 +19,8 @@ function LoginForm({
   isLogged,
   loggedMessage,
 }: LoginFormProps) {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -28,8 +33,7 @@ function LoginForm({
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const objData = Object.fromEntries(formData);
-    console.log(objData);
+    dispatch(login(formData));
   };
 
   return (
