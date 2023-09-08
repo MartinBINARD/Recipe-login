@@ -6,6 +6,7 @@ import { fetchRecipes } from '../../store/reducers/recipes';
 
 import Menu from '../Menu';
 import Home from '../Home';
+import Favorites from '../Favorites';
 import Recipe from '../Recipe';
 import Error from '../Error';
 
@@ -37,6 +38,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/recipe/:slug" element={<Recipe />} />
         <Route path="*" element={<Error />} />
       </Routes>
