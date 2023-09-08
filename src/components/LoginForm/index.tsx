@@ -1,49 +1,24 @@
-import { FormEvent, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-
-import { userLogin, userLogout } from '../../store/reducers/user';
-
+import { FormEvent } from 'react';
 import Field from './Field';
 
 import './styles.scss';
 
-interface ChangeFieldProps {
-  name: string;
-  value: string;
+interface LoginFormProps {
+  handleLogin: () => void;
+  handleLogout: () => void;
+  isLogged?: boolean;
+  loggedMessage?: string;
 }
 
-function LoginForm() {
-  const isLogged = useAppSelector((state) => state.user.logged);
-  const loggedMessage = useAppSelector(
-    (state) => `Bienvenue ${state.user.pseudo}`
-  );
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  const dispatch = useAppDispatch();
-
+function LoginForm({
+  handleLogin,
+  handleLogout,
+  isLogged,
+  loggedMessage,
+}: LoginFormProps) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    dispatch(userLogin(formData));
-
-    setEmail('');
-    setPassword('');
-  };
-
-  const changeField = ({ value, name }: ChangeFieldProps) => {
-    return name === 'email' ? setEmail(value) : setPassword(value);
-  };
-
-  const handleChangeField = (name: 'email' | 'password') => (value: string) => {
-    changeField({ value, name });
-  };
-
-  const handleLogout = () => {
-    dispatch(userLogout());
+    handleLogin();
   };
 
   return (
@@ -60,25 +35,15 @@ function LoginForm() {
           </button>
         </div>
       )}
+
       {!isLogged && (
         <form
           autoComplete="off"
           className="login-form-element"
           onSubmit={handleSubmit}
         >
-          <Field
-            name="email"
-            placeholder="Adresse Email"
-            onChange={handleChangeField('email')}
-            value={email}
-          />
-          <Field
-            name="password"
-            type="password"
-            placeholder="Mot de passe"
-            onChange={handleChangeField('password')}
-            value={password}
-          />
+          <Field placeholder="Adresse Email" />
+          <Field type="password" placeholder="Mot de passe" />
           <button type="submit" className="login-form-button">
             OK
           </button>

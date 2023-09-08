@@ -1,21 +1,20 @@
 // == Import : npm
 // == Import : local
-import { ChangeEvent, useId } from 'react';
+import { ChangeEvent, useId, useState } from 'react';
 import './styles.scss';
 
 interface FieldProps {
-  value: string;
-  name: string;
   type?: string;
   placeholder: string;
-  onChange: (value: string) => void;
 }
 // == Composant
-function Field({ value, name, type, placeholder, onChange }: FieldProps) {
+function Field({ type, placeholder }: FieldProps) {
   const inputId = useId();
 
+  const [value, setValue] = useState('');
+
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
-    onChange(event.target.value);
+    setValue(event.target.value);
   }
 
   return (
@@ -26,7 +25,6 @@ function Field({ value, name, type, placeholder, onChange }: FieldProps) {
         onChange={handleChange}
         // infos de base
         id={inputId}
-        name={name}
         type={type}
         className="field-input"
         placeholder={placeholder}
