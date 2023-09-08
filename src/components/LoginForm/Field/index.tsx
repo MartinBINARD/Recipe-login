@@ -4,11 +4,12 @@ import { ChangeEvent, useId, useState } from 'react';
 import './styles.scss';
 
 interface FieldProps {
+  name: string;
   type?: string;
   placeholder: string;
 }
 // == Composant
-function Field({ type, placeholder }: FieldProps) {
+function Field({ name, type, placeholder }: FieldProps) {
   const inputId = useId();
 
   const [value, setValue] = useState('');
@@ -20,6 +21,7 @@ function Field({ type, placeholder }: FieldProps) {
   return (
     <div className={value.length > 0 ? 'field field--has-content' : 'field'}>
       <input
+        name={name}
         // React - state
         value={value}
         onChange={handleChange}

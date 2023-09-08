@@ -42,8 +42,8 @@ function LoginForm({
           className="login-form-element"
           onSubmit={handleSubmit}
         >
-          <Field placeholder="Adresse Email" />
-          <Field type="password" placeholder="Mot de passe" />
+          <Field name="email" placeholder="Adresse Email" type="email" />
+          <Field name="password" placeholder="Mot de passe" type="password" />
           <button type="submit" className="login-form-button">
             OK
           </button>
