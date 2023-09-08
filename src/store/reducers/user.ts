@@ -1,14 +1,23 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 interface UserState {
-  logged: boolean;
+  // logged: boolean;
   pseudo: string | null;
 }
 export const initialState: UserState = {
-  logged: false,
+  // la propriété d'état `logged` est redondante avec `pseudo` :
+  // quand on est connecté : pseudo est non nul
+  // sinon, il est nul
+  // logged: false,
   pseudo: null,
 };
+
+export const logout = createAction('user/logout');
 
 export const login = createAsyncThunk(
   'user/login',
@@ -29,10 +38,14 @@ export const login = createAsyncThunk(
 );
 
 const userReducer = createReducer(initialState, (builder) => {
-  builder.addCase(login.fulfilled, (state, action) => {
-    state.logged = true;
-    state.pseudo = action.payload.pseudo;
-  });
+  builder
+    .addCase(login.fulfilled, (state, action) => {
+      // state.logged = true;
+      state.pseudo = action.payload.pseudo;
+    })
+    .addCase(logout, (state) => {
+      state.pseudo = null;
+    });
 });
 
 export default userReducer;

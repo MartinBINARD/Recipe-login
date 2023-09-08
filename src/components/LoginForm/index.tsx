@@ -1,17 +1,13 @@
 import { FormEvent } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { login } from '../../store/reducers/user';
+import { login, logout } from '../../store/reducers/user';
 
 import Field from './Field';
 
 import './styles.scss';
 
-interface LoginFormProps {
-  handleLogout: () => void;
-}
-
-function LoginForm({ handleLogout }: LoginFormProps) {
+function LoginForm() {
   const pseudo = useAppSelector((state) => state.user.pseudo);
 
   const dispatch = useAppDispatch();
@@ -23,6 +19,10 @@ function LoginForm({ handleLogout }: LoginFormProps) {
     const formData = new FormData(form);
 
     dispatch(login(formData));
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   return (
