@@ -8,6 +8,7 @@ import axios from 'axios';
 interface UserState {
   // logged: boolean;
   pseudo: string | null;
+  token: string | null;
 }
 export const initialState: UserState = {
   // la propriété d'état `logged` est redondante avec `pseudo` :
@@ -15,6 +16,7 @@ export const initialState: UserState = {
   // sinon, il est nul
   // logged: false,
   pseudo: null,
+  token: null,
 };
 
 export const logout = createAction('user/logout');
@@ -42,6 +44,7 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(login.fulfilled, (state, action) => {
       // state.logged = true;
       state.pseudo = action.payload.pseudo;
+      state.token = action.payload.token;
     })
     .addCase(logout, (state) => {
       state.pseudo = null;
