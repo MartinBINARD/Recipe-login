@@ -1,17 +1,19 @@
 /*
-  On teste le sélecteur `findRecipe`
+  Pratiquer le TDD
 
-  - il doit être une fonction
-  - il doit retourner un objet Recipe ou undefined
+  On pose la problématique :
+  on veut ajouter un titre sur la home en fonction du nombre de recettes
 
-  - il doit retourner la première recette si on lui passe le premier slug
-  - il doit retourner `undefined` quand le slug n'existe pas
+  Construction du selector en TDD
+  - Respect des 3 lois et du cycle du TDD !
 
-  Rappel : pour tester l'unité de code on l'importe !
-  Besoin : il faut des données !
-    → on utilise le fichier `data.js`
-    → const firstRecipe = data[0];
-    → const firstSlug = firstRecipe.slug;
+  Les titres en fonction du nombre de recettes :
+
+  - 0 ou pas d'argument donné à la fonction → Découvrez prochainement nos recettes.
+  - 1 → Découvrez notre recette préférée.
+  - 2+ → Découvrez nos X recettes.
+
+  Naming ? `getTitleByRecipesNumber`
 */
 
 import { describe, expect, expectTypeOf, it } from 'vitest';

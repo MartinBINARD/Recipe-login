@@ -1,24 +1,20 @@
-/*
-  pour ajouter la propriété `test` à l'objet donné à `defineConfig`,  
-  on étend les types de Vite avec ceux de Vitest
-  (mais ça marche pas toujours sur VS Code…)
-*/
+/// <reference types="vitest" />
+// ajoute le typage de Vitest → propriété `test` dans la config
+// (VSCode ne comprends pas toujours…)
 
-/// <reference types="vitest">
-
+/* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // configuration des tests pour les composants
   test: {
-    // on va gérer le DOM en JS
-    environnement: 'jsdom',
-    // le fichier de _setup_ qui sera exécuté avant de lancer nos tests
-    // fournir plus d'options dans la commande expect,
-    // voire simulera un serveur pour les requêtes HTTP
-    setupFiles: './src/tests/setup.ts',
+    // permet d'utiliser les méthodes de Vitest sans devoir les importer
+    globals: true,
+    // permet de rendre le DOM en JS
+    environment: 'jsdom',
+    // lien vers le fichier de configuration
+    setupFiles: './test-setup.js',
   },
 });

@@ -15,10 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["@types/jest", "@testing-library/jest-dom"]
+    "types": ["vitest/globals"] // permet de typer les méthodes de Vitest
   },
   "include": [
     "vite.config.ts",
+    "test-setup.js", // prévient ESLint de l'existence de ce fichier
     ".eslintrc.cjs",
     "src"
   ],
