@@ -8,6 +8,10 @@ import recipesReducer, {
   setLoading,
 } from '../../../store/reducers/recipes';
 
+import { Recipe } from '../../../@types/recipe';
+
+import data from '../../../data';
+
 describe('Recipes Reducer', () => {
   describe('Structure', () => {
     it('Should be a function', () => {
@@ -101,7 +105,8 @@ describe('Recipes Reducer', () => {
         //       est de retrouver ces infos dans mon state final
         //   - un `requestId` (généré par Toolkit)
         //     → je lui donne un faux ID, le principal est de lui en donner un
-        const fakePayload = [{ fakeRecipe: 'testing' }];
+        // const fakePayload = [{ fakeRecipe: 'testing' }];
+        const fakePayload: Recipe[] = data;
         const fakeRequestId = 'id123456fake';
         // je génère mon action
         const action = fetchRecipes.fulfilled(fakePayload, fakeRequestId);
