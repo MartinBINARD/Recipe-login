@@ -106,6 +106,28 @@ describe('Recipes Reducer', () => {
         // je génère mon action
         const action = fetchRecipes.fulfilled(fakePayload, fakeRequestId);
         // TS râle mais c'est pas grave ici…
+
+        // console.log(action);
+
+        // j'exécute mon reducer en lui donnant un state et mon action générée
+        const state = recipesReducer(initialState, action);
+        // console.log(initialState);
+        // console.log(state);
+
+        // je teste le nouveau state :
+        //   - `loading` doit être `false`
+        //   - `list` qui doit correspondre à `fakePayload` (= résultat API = payload)
+
+        // soit l'objet entier
+        expect(state).toEqual({
+          ...initialState,
+          loading: false,
+          list: fakePayload,
+        });
+
+        // soit propriété par propriété
+        expect(state.loading).toBe(false);
+        expect(state.list).toEqual(fakePayload);
       });
     });
   });
