@@ -21,6 +21,9 @@ import sum from './example-sum';
     - une factory (un callback) → ce que l'on fait
 */
 describe('Sum function', () => {
+  // pour sauter/ignorer cette suite de tests, j'utilise `skip`
+  // describe.skip('Sum function', () => {
+
   // suite de tests
   // describe('Sous-chapitre') → « sous-chapitres »
 
@@ -89,7 +92,10 @@ describe('Sum function', () => {
     });
   });
 
-  describe('Execution', () => {
+  /*
+    Pour n'exécuter que cette suite, j'utilise `only`
+  */
+  describe.only('Execution', () => {
     it('Should return 8 when given 3 and 5', () => {
       expect(sum(3, 5)).toBe(8);
     });

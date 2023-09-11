@@ -1,4 +1,8 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from '@reduxjs/toolkit';
 
 import axiosInstance from '../../utils/axios';
 
@@ -15,6 +19,12 @@ export const initialState: RecipesState = {
   list: [],
   favorites: [],
 };
+
+/*
+  « Action synchrone » juste pour les tests
+  → but pédagogique
+*/
+export const setLoading = createAction<boolean>('recipes/set-loading');
 
 /*
   « Action asynchrone » pour mon appel API
@@ -48,7 +58,7 @@ const recipesReducer = createReducer(initialState, (builder) => {
     .addCase(fetchRecipes.rejected, (state, action) => {
       state.loading = false;
       // Messaged 'erreur
-      alert('ERROR');
+      // alert('ERROR');
     })
     .addCase(fetchFavorites.fulfilled, (state, action) => {
       state.loading = false;
@@ -57,7 +67,10 @@ const recipesReducer = createReducer(initialState, (builder) => {
     .addCase(fetchFavorites.rejected, (state, action) => {
       state.loading = false;
       // Messaged 'erreur
-      alert('ERROR');
+      // alert('ERROR');
+    })
+    .addCase(setLoading, (state, action) => {
+      state.loading = action.payload;
     });
 });
 
