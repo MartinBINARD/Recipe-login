@@ -8,6 +8,8 @@
 */
 
 import { describe, expect, expectTypeOf, it } from 'vitest';
+
+// j'importe mon unité de code à tester
 import sum from './example-sum';
 
 /*
@@ -54,7 +56,7 @@ describe('Sum function', () => {
         expect(2 + 3).toBe(5)
         expect(2 + 5).not.toBe(5)
         expect(2 === 3).toEqual(false)
-        
+
         > https://vitest.dev/api/expect.html
       */
 
@@ -75,7 +77,31 @@ describe('Sum function', () => {
       */
       expectTypeOf(sum).toBeFunction();
     });
+
+    it('Should return a number', () => {
+      // expectTypeOf(sum()).toBeNumber();
+      // je m'attends à ce que le type retourné par l'appel de `sum`
+      // soit un nombre
+      expect(typeof sum()).toBe('number');
+      // je m'attends à ne pas recevoir `NaN`
+      // → attention en JS `NaN` est un nombre !?!
+      expect(sum()).not.toBeNaN();
+    });
   });
 
-  // describe('Execution', () => {});
+  describe('Execution', () => {
+    it('Should return 8 when given 3 and 5', () => {
+      expect(sum(3, 5)).toBe(8);
+    });
+
+    it('Should not return 8 when given 3 and 2', () => {
+      expect(sum(3, 2)).not.toBe(8);
+    });
+
+    it('Should take as many number as I want', () => {
+      expect(sum(3)).toBe(3);
+      expect(sum(3, 2, 5)).toBe(10);
+      expect(sum(3, 2, 5, 100)).toBe(110);
+    });
+  });
 });
