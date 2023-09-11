@@ -132,7 +132,13 @@ describe('Recipes Reducer', () => {
 
         // soit propriété par propriété
         expect(state.loading).toBe(false);
+        // identique à :
+        // > https://vitest.dev/api/expect.html
+        expect(state).toHaveProperty('loading', false);
+
         expect(state.list).toEqual(fakePayload);
+        // identique à :
+        expect(state).toHaveProperty('list', fakePayload);
       });
     });
   });
